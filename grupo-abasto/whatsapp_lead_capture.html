@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InmoLeads — Propiedades con Captura de Leads WhatsApp</title>
+    <meta name="description" content="Portal inmobiliario con sistema de captura de leads vía WhatsApp">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --card: #222632;
+            --border: #2d3348;
+            --text: #e8eaf0;
+            --text-muted: #8b90a0;
+            --primary: #4a7dff;
+            --primary-hover: #3a6df0;
+            --wa-green: #25D366;
+            --wa-dark: #128C7E;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --radius: 16px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, .3)
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 17, 23, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--wa-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .logo span {
+            font-weight: 400;
+            font-size: .9rem;
+            -webkit-text-fill-color: var(--text-muted);
+            margin-left: .5rem
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem 1.2rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: .875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all .25s
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border)
+        }
+
+        .btn-ghost:hover {
+            background: var(--card);
+            color: var(--text)
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #6c5ce7);
+            color: #fff
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(74, 125, 255, .4)
+        }
+
+        .badge {
+            background: var(--wa-green);
+            color: #fff;
+            font-size: .7rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 50px;
+            margin-left: 4px;
+            min-width: 20px;
+            text-align: center
+        }
+
+        /* HERO */
+        .hero {
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(74, 125, 255, .08) 0%, transparent 100%)
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--wa-green), #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem
+        }
+
+        .search-bar {
+            max-width: 640px;
+            margin: 0 auto;
+            display: flex;
+            gap: .5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 6px
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            padding: .7rem 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-muted)
+        }
+
+        .search-bar .btn {
+            border-radius: 10px;
+            padding: .7rem 1.5rem
+        }
+
+        /* GRID */
+        .section-title {
+            max-width: 1280px;
+            margin: 2rem auto .5rem;
+            padding: 0 2rem;
+            font-size: 1.3rem;
+            font-weight: 700
+        }
+
+        .section-subtitle {
+            max-width: 1280px;
+            margin: 0 auto 1.5rem;
+            padding: 0 2rem;
+            color: var(--text-muted);
+            font-size: .95rem
+        }
+
+        .grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem
+        }
+
+        /* CARD */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all .3s;
+            position: relative
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: rgba(74, 125, 255, .3)
+        }
+
+        .card-img {
+            position: relative;
+            height: 220px;
+            overflow: hidden
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.05)
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(15, 17, 23, .75);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--accent)
+        }
+
+        .card-type {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: .7rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase
+        }
+
+        .card-body {
+            padding: 1.2rem
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: .3rem
+        }
+
+        .card-price span {
+            font-size: .85rem;
+            font-weight: 400;
+            color: var(--text-muted)
+        }
+
+        .card-location {
+            color: var(--text-muted);
+            font-size: .85rem;
+            margin-bottom: .8rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem
+        }
+
+        .card-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            font-size: .8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, .04);
+            padding: 4px 10px;
+            border-radius: 8px
+        }
+
+        .feature svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 2
+        }
+
+        .card-actions {
+            display: flex;
+            gap: .5rem
+        }
+
+        .btn-wa {
+            flex: 1;
+            background: linear-gradient(135deg, var(--wa-green), var(--wa-dark));
+            color: #fff;
+            justify-content: center;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: .75rem
+        }
+
+        .btn-wa:hover {
+            box-shadow: 0 4px 20px rgba(37, 211, 102, .4);
+            transform: translateY(-1px)
+        }
+
+        .btn-wa svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff
+        }
+
+        .btn-save {
+            background: var(--surface);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: .75rem .9rem
+        }
+
+        .btn-save:hover {
+            color: var(--accent);
+            border-color: var(--accent)
+        }
+
+        /* FLOATING WA */
+        .floating-wa {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 90;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--wa-green), var(--wa-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 24px rgba(37, 211, 102, .5);
+            border: none;
+            transition: all .3s;
+            animation: pulse 2s infinite
+        }
+
+        .floating-wa:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, .6)
+        }
+
+        .floating-wa svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 24px rgba(37, 211, 102, .5)
+            }
+
+            50% {
+                box-shadow: 0 4px 40px rgba(37, 211, 102, .7)
+            }
+        }
+
+        /* MODAL OVERLAY */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 460px;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform .3s
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0)
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all .2s
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+            color: #fff;
+            border-color: var(--danger)
+        }
+
+        .modal-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--wa-green), var(--wa-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem
+        }
+
+        .modal-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff
+        }
+
+        .modal h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: .3rem
+        }
+
+        .modal .subtitle {
+            color: var(--text-muted);
+            font-size: .9rem;
+            margin-bottom: 1.5rem
+        }
+
+        .form-group {
+            margin-bottom: 1rem
+        }
+
+        .form-group label {
+            display: block;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: .4rem;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: .75rem 1rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: .95rem;
+            outline: none;
+            transition: border .2s
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 125, 255, .15)
+        }
+
+        .form-group input.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, .15)
+        }
+
+        .form-group .error-msg {
+            color: var(--danger);
+            font-size: .75rem;
+            margin-top: .3rem;
+            display: none
+        }
+
+        .form-group input.error+.error-msg {
+            display: block
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: .85rem;
+            font-size: 1rem;
+            margin-top: .5rem
+        }
+
+        .form-property {
+            background: var(--card);
+            border-radius: 10px;
+            padding: .8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            font-size: .85rem
+        }
+
+        .form-property img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover
+        }
+
+        .form-property .fp-name {
+            font-weight: 600;
+            color: var(--text)
+        }
+
+        .form-property .fp-price {
+            color: var(--wa-green);
+            font-weight: 700
+        }
+
+        /* DASHBOARD MODAL */
+        .dash-modal {
+            max-width: 800px
+        }
+
+        .dash-modal h2 {
+            margin-bottom: 1rem
+        }
+
+        .dash-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .75rem;
+            margin-bottom: 1.5rem
+        }
+
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--border)
+        }
+
+        .stat-card .stat-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--wa-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .stat-card .stat-label {
+            font-size: .75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-top: .2rem
+        }
+
+        .dash-actions {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 1rem
+        }
+
+        .btn-sm {
+            padding: .5rem 1rem;
+            font-size: .8rem;
+            border-radius: 8px
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #fff
+        }
+
+        .btn-success:hover {
+            opacity: .9
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff
+        }
+
+        .btn-danger:hover {
+            opacity: .9
+        }
+
+        .leads-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .8rem
+        }
+
+        .leads-table th {
+            text-align: left;
+            padding: .6rem .8rem;
+            background: var(--card);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-size: .7rem;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .leads-table td {
+            padding: .6rem .8rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text)
+        }
+
+        .leads-table tr:hover td {
+            background: rgba(74, 125, 255, .05)
+        }
+
+        .table-wrap {
+            max-height: 350px;
+            overflow-y: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border)
+        }
+
+        .table-wrap::-webkit-scrollbar {
+            width: 6px
+        }
+
+        .table-wrap::-webkit-scrollbar-track {
+            background: var(--card)
+        }
+
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted)
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--border);
+            margin-bottom: .5rem
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:768px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .header-inner {
+                padding: 0
+            }
+
+            .dash-stats {
+                grid-template-columns: 1fr
+            }
+
+            .modal,
+            .dash-modal {
+                max-width: 100%
+            }
+
+            .search-bar {
+                flex-direction: column
+            }
+
+            .search-bar .btn {
+                width: 100%
+            }
+        }
+
+        /* SUCCESS TOAST */
+        .toast {
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            z-index: 300;
+            background: var(--surface);
+            border: 1px solid var(--success);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+            transform: translateX(120%);
+            transition: transform .4s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .toast.show {
+            transform: translateX(0)
+        }
+
+        .toast-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .toast-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--success);
+            fill: none;
+            stroke-width: 2.5
+        }
+
+        .toast-text {
+            font-size: .85rem;
+            font-weight: 600
+        }
+
+        .toast-sub {
+            font-size: .75rem;
+            color: var(--text-muted);
+            font-weight: 400
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">InmoLeads<span>Captura Inteligente</span></div>
+            <div class="header-actions">
+                <button class="btn btn-ghost" onclick="openDashboard()">📊 Ver Leads <span class="badge"
+                        id="leadsBadge">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Encuentra tu hogar ideal<br>con <span class="highlight">contacto directo</span></h1>
+        <p>Explora las mejores propiedades y contacta a los vendedores por WhatsApp. Tu información queda registrada
+            para un seguimiento personalizado.</p>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar por ciudad, colonia o código postal..." id="searchInput">
+            <button class="btn btn-primary" onclick="filterProperties()">🔍 Buscar</button>
+        </div>
+    </section>
+
+    <!-- PROPERTY GRID -->
+    <h2 class="section-title">Propiedades destacadas</h2>
+    <p class="section-subtitle">Haz clic en "WhatsApp" para contactar — primero capturamos tus datos para darte mejor
+        seguimiento</p>
+    <div class="grid" id="propertyGrid"></div>
+
+    <!-- WA FLOATING BUTTON -->
+    <button class="floating-wa" onclick="openModal(null)" title="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.12 1.52 5.856L.057 23.64l5.928-1.555A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.94 0-3.76-.53-5.32-1.45l-.38-.23-3.95 1.04 1.06-3.86-.25-.39A9.8 9.8 0 012.18 12 9.82 9.82 0 0112 2.18 9.82 9.82 0 0121.82 12 9.82 9.82 0 0112 21.82z" />
+        </svg>
+    </button>
+
+    <!-- LEAD CAPTURE MODAL -->
+    <div class="modal-overlay" id="leadModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-icon"><svg viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.12 1.52 5.856L.057 23.64l5.928-1.555A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.94 0-3.76-.53-5.32-1.45l-.38-.23-3.95 1.04 1.06-3.86-.25-.39A9.8 9.8 0 012.18 12 9.82 9.82 0 0112 2.18 9.82 9.82 0 0121.82 12 9.82 9.82 0 0112 21.82z" />
+                </svg></div>
+            <h2>Contactar por WhatsApp</h2>
+            <p class="subtitle">Completa tus datos para contactar al vendedor y recibir seguimiento personalizado</p>
+            <div id="propertyInfo"></div>
+            <form id="leadForm" onsubmit="return handleSubmit(event)">
+                <div class="form-group"><label>Nombre completo</label><input type="text" id="leadName"
+                        placeholder="Ej: María García López" required><span class="error-msg">Por favor ingresa tu
+                        nombre</span></div>
+                <div class="form-group"><label>Teléfono</label><input type="tel" id="leadPhone"
+                        placeholder="Ej: 55 1234 5678" required><span class="error-msg">Ingresa un teléfono válido (10
+                        dígitos)</span></div>
+                <div class="form-group"><label>Correo electrónico</label><input type="email" id="leadEmail"
+                        placeholder="Ej: maria@correo.com" required><span class="error-msg">Ingresa un email
+                        válido</span></div>
+                <button type="submit" class="btn btn-wa btn-submit">
+                    <svg viewBox="0 0 24 24" style="width:20px;height:20px">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    </svg>
+                    Enviar y abrir WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD MODAL -->
+    <div class="modal-overlay" id="dashModal">
+        <div class="modal dash-modal">
+            <button class="modal-close" onclick="closeDashboard()">✕</button>
+            <h2>📊 Dashboard de Leads</h2>
+            <div class="dash-stats">
+                <div class="stat-card">
+                    <div class="stat-num" id="statTotal">0</div>
+                    <div class="stat-label">Total Leads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" id="statToday">0</div>
+                    <div class="stat-label">Hoy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" id="statWeek">0</div>
+                    <div class="stat-label">Esta Semana</div>
+                </div>
+            </div>
+            <div class="dash-actions">
+                <button class="btn btn-sm btn-success" onclick="exportCSV()">📥 Exportar CSV</button>
+                <button class="btn btn-sm btn-danger" onclick="clearLeads()">🗑️ Limpiar todo</button>
+            </div>
+            <div class="table-wrap">
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Propiedad</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsBody"></tbody>
+                </table>
+            </div>
+            <div class="empty-state" id="emptyState" style="display:none"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <p>No hay leads capturados aún</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS TOAST -->
+    <div class="toast" id="successToast">
+        <div class="toast-icon"><svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+            </svg></div>
+        <div>
+            <div class="toast-text">Lead guardado ✓</div>
+            <div class="toast-sub">Redirigiendo a WhatsApp...</div>
+        </div>
+    </div>
+
+    <script>
+        // === PROPERTY DATA ===
+        const properties = [
+            { id: 1, title: "Casa Moderna con Jardín", price: "$3,450,000", location: "Col. Del Valle, CDMX", sqm: 180, beds: 3, baths: 2, type: "Venta", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop", wa: "5215512345678" },
+            { id: 2, title: "Departamento de Lujo", price: "$5,200,000", location: "Polanco, CDMX", sqm: 220, beds: 4, baths: 3, type: "Venta", img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop", wa: "5215512345678" },
+            { id: 3, title: "Penthouse con Vista Panorámica", price: "$8,900,000", location: "Santa Fe, CDMX", sqm: 320, beds: 4, baths: 4, type: "Venta", img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop", wa: "5215512345678" },
+            { id: 4, title: "Casa en Fraccionamiento Privado", price: "$2,800,000", location: "Juriquilla, Querétaro", sqm: 150, beds: 3, baths: 2, type: "Venta", img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&h=400&fit=crop", wa: "5215512345678" },
+            { id: 5, title: "Residencia Campestre", price: "$6,750,000", location: "Valle de Bravo, Edo. Méx.", sqm: 450, beds: 5, baths: 4, type: "Venta", img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop", wa: "5215512345678" },
+            { id: 6, title: "Loft Industrial Renovado", price: "$1,950,000", location: "Roma Norte, CDMX", sqm: 95, beds: 1, baths: 1, type: "Venta", img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop", wa: "5215512345678" }
+        ];
+
+        let currentProperty = null;
+
+        // === RENDER PROPERTIES ===
+        function renderProperties(list) {
+            const grid = document.getElementById('propertyGrid');
+            grid.innerHTML = list.map(p => `
+    <div class="card" data-title="${p.title.toLowerCase()}">
+      <div class="card-img">
+        <img src="${p.img}" alt="${p.title}" loading="lazy">
+        <div class="card-badge">⭐ Destacada</div>
+        <div class="card-type">${p.type}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-price">${p.price} <span>MXN</span></div>
+        <div class="card-location">📍 ${p.location}</div>
+        <div class="card-features">
+          <div class="feature"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M9 3v18"/></svg>${p.sqm} m²</div>
+          <div class="feature"><svg viewBox="0 0 24 24"><path d="M3 7v11a2 2 0 002 2h14a2 2 0 002-2V7"/><path d="M21 10H3V7a2 2 0 012-2h14a2 2 0 012 2v3z"/></svg>${p.beds} rec.</div>
+          <div class="feature"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12a2 2 0 01-2-2V6m18 6a2 2 0 002-2V6M6 12v4m12-4v4"/></svg>${p.baths} baños</div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-wa" onclick='openModal(${JSON.stringify(p).replace(/'/g, "&#39;")})'>
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+            WhatsApp
+          </button>
+          <button class="btn btn-save" title="Guardar">♡</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+        }
+
+        // === MODAL ===
+        function openModal(property) {
+            currentProperty = property;
+            const info = document.getElementById('propertyInfo');
+            if (property) {
+                info.innerHTML = `<div class="form-property"><img src="${property.img}" alt=""><div><div class="fp-name">${property.title}</div><div class="fp-price">${property.price}</div></div></div>`;
+            } else {
+                info.innerHTML = '<div class="form-property" style="justify-content:center;color:var(--text-muted)">Consulta general sobre propiedades</div>';
+            }
+            document.getElementById('leadModal').classList.add('active');
+            document.getElementById('leadName').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('leadModal').classList.remove('active');
+            document.getElementById('leadForm').reset();
+            document.querySelectorAll('.form-group input').forEach(i => i.classList.remove('error'));
+        }
+
+        // === FORM VALIDATION & SUBMIT ===
+        function handleSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName');
+            const phone = document.getElementById('leadPhone');
+            const email = document.getElementById('leadEmail');
+            let valid = true;
+
+            [name, phone, email].forEach(i => i.classList.remove('error'));
+
+            if (!name.value.trim()) { name.classList.add('error'); valid = false; }
+            if (!/^\d{10,15}$/.test(phone.value.replace(/\s/g, ''))) { phone.classList.add('error'); valid = false; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); valid = false; }
+
+            if (!valid) return false;
+
+            const lead = {
+                id: Date.now(),
+                name: name.value.trim(),
+                phone: phone.value.trim(),
+                email: email.value.trim(),
+                property: currentProperty ? currentProperty.title : 'Consulta general',
+                propertyPrice: currentProperty ? currentProperty.price : '-',
+                timestamp: new Date().toISOString()
+            };
+
+            saveLead(lead);
+            closeModal();
+            showToast();
+
+            // Build WhatsApp message
+            const waNumber = currentProperty ? currentProperty.wa : '5215512345678';
+            const msg = currentProperty
+                ? `Hola, soy ${lead.name}. Me interesa la propiedad "${currentProperty.title}" (${currentProperty.price}) en ${currentProperty.location}. Mi teléfono: ${lead.phone}, email: ${lead.email}. ¿Podrían darme más información?`
+                : `Hola, soy ${lead.name}. Estoy interesado en sus propiedades disponibles. Mi teléfono: ${lead.phone}, email: ${lead.email}.`;
+
+            setTimeout(() => {
+                window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+            }, 1200);
+
+            return false;
+        }
+
+        // === LOCALSTORAGE ===
+        function saveLead(lead) {
+            const leads = getLeads();
+            leads.unshift(lead);
+            localStorage.setItem('inmoleads_db', JSON.stringify(leads));
+            updateBadge();
+        }
+
+        function getLeads() {
+            try { return JSON.parse(localStorage.getItem('inmoleads_db')) || []; }
+            catch { return []; }
+        }
+
+        function updateBadge() {
+            const count = getLeads().length;
+            document.getElementById('leadsBadge').textContent = count;
+        }
+
+        // === DASHBOARD ===
+        function openDashboard() {
+            const leads = getLeads();
+            const now = new Date();
+            const todayStr = now.toISOString().slice(0, 10);
+            const weekAgo = new Date(now - 7 * 86400000);
+
+            document.getElementById('statTotal').textContent = leads.length;
+            document.getElementById('statToday').textContent = leads.filter(l => l.timestamp.slice(0, 10) === todayStr).length;
+            document.getElementById('statWeek').textContent = leads.filter(l => new Date(l.timestamp) >= weekAgo).length;
+
+            const tbody = document.getElementById('leadsBody');
+            const empty = document.getElementById('emptyState');
+
+            if (leads.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+            } else {
+                empty.style.display = 'none';
+                tbody.innerHTML = leads.map(l => {
+                    const d = new Date(l.timestamp);
+                    return `<tr><td>${d.toLocaleDateString('es-MX')} ${d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}</td><td>${l.name}</td><td>${l.phone}</td><td>${l.email}</td><td>${l.property}</td></tr>`;
+                }).join('');
+            }
+            document.getElementById('dashModal').classList.add('active');
+        }
+
+        function closeDashboard() { document.getElementById('dashModal').classList.remove('active'); }
+
+        function exportCSV() {
+            const leads = getLeads();
+            if (!leads.length) return alert('No hay leads para exportar');
+            const header = 'Fecha,Nombre,Teléfono,Email,Propiedad,Precio\n';
+            const rows = leads.map(l => `"${new Date(l.timestamp).toLocaleString('es-MX')}","${l.name}","${l.phone}","${l.email}","${l.property}","${l.propertyPrice}"`).join('\n');
+            const blob = new Blob(['\ufeff' + header + rows], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `inmoleads_${new Date().toISOString().slice(0, 10)}.csv`;
+            link.click();
+        }
+
+        function clearLeads() {
+            if (!confirm('¿Estás seguro de eliminar todos los leads?')) return;
+            localStorage.removeItem('inmoleads_db');
+            updateBadge();
+            openDashboard();
+        }
+
+        // === TOAST ===
+        function showToast() {
+            const t = document.getElementById('successToast');
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // === SEARCH ===
+        function filterProperties() {
+            const q = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filtered = q ? properties.filter(p => p.title.toLowerCase().includes(q) || p.location.toLowerCase().includes(q)) : properties;
+            renderProperties(filtered);
+        }
+        document.getElementById('searchInput').addEventListener('keyup', e => { if (e.key === 'Enter') filterProperties(); });
+
+        // === CLOSE MODALS ON OVERLAY CLICK ===
+        document.querySelectorAll('.modal-overlay').forEach(o => {
+            o.addEventListener('click', e => { if (e.target === o) { o.classList.remove('active'); } });
+        });
+
+        // === INIT ===
+        renderProperties(properties);
+        updateBadge();
+    </script>
+</body>
+
+</html>

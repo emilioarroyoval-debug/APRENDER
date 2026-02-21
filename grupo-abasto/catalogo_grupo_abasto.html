@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Abasto - Catálogo 2025 León, GTO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5f7f 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #00a86b 0%, #009659 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .contact-info {
+            background: #f0f8ff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #00a86b;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .contact-info strong {
+            color: #00a86b;
+        }
+
+        .products-section {
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #00a86b;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #00a86b;
+        }
+
+        .product-number {
+            display: inline-block;
+            background: #00a86b;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1a3a52;
+            margin: 10px 0;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: #e0f2e0;
+            color: #00a86b;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .price-section {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .price-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .price-value {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #00a86b;
+        }
+
+        .discount-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .unit-info {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        footer {
+            background: #1a3a52;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 3px solid #00a86b;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        .footer-highlight {
+            color: #00a86b;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🚚 GRUPO ABASTO</h1>
+            <p class="tagline">Tu proveedor confiable de productos de limpieza y desechables en León, Guanajuato</p>
+        </header>
+
+        <div class="contact-info">
+            <p><strong>📧 Email:</strong> grupoabasto2@gmail.com</p>
+            <p><strong>📞 Teléfono:</strong> 479 293 9496</p>
+            <p><strong>📍 Zona de cobertura:</strong> León y alrededores</p>
+        </div>
+
+        <div class="products-section">
+            <h2 class="section-title">TOP 20 Productos Más Vendidos - León, GTO</h2>
+
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <span class="product-number">1</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Limpiador Multiusos (Tipo Fabuloso)</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$28</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (6+ botellas)</span>
+                            <span class="price-value">$24</span>
+                            <span class="discount-badge">-14%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Botella de 900ml | Uso general</p>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <span class="product-number">2</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Vasos de Unicel 12 OZ</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$45</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ paquetes)</span>
+                            <span class="price-value">$38</span>
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">50 piezas por paquete | Muy popular</p>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <span class="product-number">3</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Charolas de Unicel Grande</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$65</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (4+ paquetes)</span>
+                            <span class="price-value">$55</span>
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Para restaurantes y pollerías</p>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <span class="product-number">4</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Cloro</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$18</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (12+ botellas)</span>
+                            <span class="price-value">$14</span>
+                            <span class="discount-badge">-22%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">750ml | Desinfectante</p>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="product-card">
+                    <span class="product-number">5</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Desengrasante Multiusos</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$32</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (6+ botellas)</span>
+                            <span class="price-value">$27</span>
+                            <span class="discount-badge">-16%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">900ml | Para cocinas</p>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="product-card">
+                    <span class="product-number">6</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Servilletas Paquete 500 pz</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 paquete)</span>
+                            <span class="price-value">$35</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (8+ paquetes)</span>
+                            <span class="price-value">$30</span>
+                            <span class="discount-badge">-14%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Esencial para comercios</p>
+                </div>
+
+                <!-- Producto 7 -->
+                <div class="product-card">
+                    <span class="product-number">7</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Jabón para Manos Atomizador</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$45</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (4+ botellas)</span>
+                            <span class="price-value">$38</span>
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">500ml | Varios aromas</p>
+                </div>
+
+                <!-- Producto 8 -->
+                <div class="product-card">
+                    <span class="product-number">8</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Vaso Reyma 16 oz</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$55</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (3+ paquetes)</span>
+                            <span class="price-value">$48</span>
+                            <span class="discount-badge">-12%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">250 piezas | Vaso premium</p>
+                </div>
+
+                <!-- Producto 9 -->
+                <div class="product-card">
+                    <span class="product-number">9</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Limpiador Tipo Pinol</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$26</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (8+ botellas)</span>
+                            <span class="price-value">$22</span>
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">900ml | Fragancia fresca</p>
+                </div>
+
+                <!-- Producto 10 -->
+                <div class="product-card">
+                    <span class="product-number">10</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Bolsa Asa Negra Grande</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$85</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ paquetes)</span>
+                            <span class="price-value">$72</span>
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">30x60cm | Para tiendas</p>
+                </div>
+
+                <!-- Producto 11 -->
+                <div class="product-card">
+                    <span class="product-number">11</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Windex con Atomizador</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$42</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ botellas)</span>
+                            <span class="price-value">$36</span>
+                            <span class="discount-badge">-14%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">500ml | Limpia vidrios</p>
+                </div>
+
+                <!-- Producto 12 -->
+                <div class="product-card">
+                    <span class="product-number">12</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Cucharas de Plástico</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (kg)</span>
+                            <span class="price-value">$45</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ kg)</span>
+                            <span class="price-value">$38</span>
+                            <span class="discount-badge">-15%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Aprox. 200-250 piezas/kg</p>
+                </div>
+
+                <!-- Producto 13 -->
+                <div class="product-card">
+                    <span class="product-number">13</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Suavizante Tipo Suavitel</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$35</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (6+ botellas)</span>
+                            <span class="price-value">$29</span>
+                            <span class="discount-badge">-17%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">900ml | Para ropa</p>
+                </div>
+
+                <!-- Producto 14 -->
+                <div class="product-card">
+                    <span class="product-number">14</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Contenedor 8x8 Unicel</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$75</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ paquetes)</span>
+                            <span class="price-value">$64</span>
+                            <span class="discount-badge">-14%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">50 piezas | Para alimentos</p>
+                </div>
+
+                <!-- Producto 15 -->
+                <div class="product-card">
+                    <span class="product-number">15</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Jabón para Trastes</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$20</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (12+ botellas)</span>
+                            <span class="price-value">$16</span>
+                            <span class="discount-badge">-20%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">750ml | Económico</p>
+                </div>
+
+                <!-- Producto 16 -->
+                <div class="product-card">
+                    <span class="product-number">16</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Popotes Desechables</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (kg)</span>
+                            <span class="price-value">$32</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ kg)</span>
+                            <span class="price-value">$27</span>
+                            <span class="discount-badge">-16%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Aprox. 800-900 piezas/kg</p>
+                </div>
+
+                <!-- Producto 17 -->
+                <div class="product-card">
+                    <span class="product-number">17</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Aroma para Auto Atomizador</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 botella)</span>
+                            <span class="price-value">$28</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (8+ botellas)</span>
+                            <span class="price-value">$23</span>
+                            <span class="discount-badge">-18%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">500ml | Varios aromas</p>
+                </div>
+
+                <!-- Producto 18 -->
+                <div class="product-card">
+                    <span class="product-number">18</span>
+                    <div class="product-category">Papelería</div>
+                    <h3 class="product-name">Hojas Tamaño Carta</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$38</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ paquetes)</span>
+                            <span class="price-value">$32</span>
+                            <span class="discount-badge">-16%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">500 hojas | Blancas</p>
+                </div>
+
+                <!-- Producto 19 -->
+                <div class="product-card">
+                    <span class="product-number">19</span>
+                    <div class="product-category">Desechables</div>
+                    <h3 class="product-name">Bolsa Basura 90x120</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (paquete)</span>
+                            <span class="price-value">$125</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (3+ paquetes)</span>
+                            <span class="price-value">$105</span>
+                            <span class="discount-badge">-16%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Resiste peso | Grandes volúmenes</p>
+                </div>
+
+                <!-- Producto 20 -->
+                <div class="product-card">
+                    <span class="product-number">20</span>
+                    <div class="product-category">Limpieza</div>
+                    <h3 class="product-name">Bicarbonato de Sodio</h3>
+                    <div class="price-section">
+                        <div class="price-row">
+                            <span class="price-label">Menudeo (1 kg)</span>
+                            <span class="price-value">$18</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Mayoreo (5+ kg)</span>
+                            <span class="price-value">$14</span>
+                            <span class="discount-badge">-22%</span>
+                        </div>
+                    </div>
+                    <p class="unit-info">Multiusos | Económico</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><span class="footer-highlight">✓ GARANTÍA DE CALIDAD</span> | Productos comprobados en el mercado leonés
+            </p>
+            <p><span class="footer-highlight">✓ ENVÍO RÁPIDO</span> | Entrega en León y municipios aledaños</p>
+            <p><span class="footer-highlight">✓ PRECIOS COMPETITIVOS</span> | Los mejores descuentos en mayoreo</p>
+            <br>
+            <p>📞 <strong>479 293 9496</strong> | 📧 <strong>grupoabasto2@gmail.com</strong></p>
+            <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.8;">Catálogo actualizado 2025 | Precios sujetos a
+                cambio sin previo aviso</p>
+        </footer>
+    </div>
+</body>
+
+</html>
